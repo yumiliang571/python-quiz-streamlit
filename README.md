@@ -2,6 +2,12 @@
 
 这是一个适合程序设计基础课程展示的 Python 网页小游戏。项目使用 Streamlit 开发，只需要 Python 代码就能生成可交互网页。
 
+## 在线访问
+
+本游戏已部署到 Streamlit Community Cloud，电脑、手机浏览器都能直接打开使用，无需安装任何 Python 环境。
+
+🔗 在线地址：<在此填入你的 Streamlit 应用链接（形如 https://xxx.streamlit.app）>
+
 ## 选题名称
 
 Python 期末复习闯关：从基础语法到排序、递归与二维列表
@@ -48,86 +54,6 @@ Python 期末复习闯关：从基础语法到排序、递归与二维列表
 - 部分拓展题：列表推导式、`lambda`、`filter`
 
 `题库.md` 是题库查阅版，和当前 `app.py` 的题库内容保持一致。正式改题时建议优先修改 `app.py`，再同步更新 `题库.md`。
-
-## 本机运行方法
-
-关键：必须用 `streamlit run`，不要直接运行 `python3 app.py`。
-
-在终端执行：
-
-```bash
-python3 -m streamlit run app.py
-```
-
-运行后浏览器会自动打开，默认地址一般是：
-
-```text
-http://localhost:8501
-```
-
-如果提示缺少 Streamlit，先安装依赖：
-
-```bash
-python3 -m pip install -r requirements.txt
-```
-
-## 让其他人打开网页
-
-### 方法一：课堂展示最稳
-
-只在一台电脑上运行网页，然后投屏展示。
-
-适合 10 分钟课堂分享，风险最低，不受同学手机网络、校园网隔离、防火墙影响。
-
-### 方法二：同一 Wi-Fi 下让同学用手机打开
-
-如果想让组员或全班同学一起点网页，需要运行电脑和访问设备在同一个 Wi-Fi 下。
-
-在运行电脑上执行：
-
-```bash
-python3 -m streamlit run app.py --server.address 0.0.0.0 --server.port 8501
-```
-
-然后查询这台电脑的局域网 IP：
-
-```bash
-ipconfig getifaddr en0
-```
-
-假设查到的 IP 是 `192.168.1.23`，其他人就在浏览器打开：
-
-```text
-http://192.168.1.23:8501
-```
-
-注意：
-
-- 所有人必须连接同一个 Wi-Fi，不能有人用手机流量。
-- 运行网页的电脑不能关机、睡眠或断网。
-- 如果 macOS 弹出网络访问提示，要允许。
-- 有些校园网会禁止设备互相访问，这时这个方法可能打不开。
-
-### 方法三：部署到线上，所有人都能打开
-
-如果希望不受同一 Wi-Fi 限制，最适合部署到 Streamlit Community Cloud。
-
-大致步骤：
-
-1. 把项目文件上传到 GitHub 仓库。
-2. 仓库里至少保留 `app.py` 和 `requirements.txt`。
-3. 登录 Streamlit Community Cloud。
-4. 点击 Create app，选择 GitHub 仓库和 `app.py`。
-5. Deploy 成功后，复制网页链接发给同学。
-
-这种方式最适合全班扫码访问，但需要提前准备 GitHub 和 Streamlit 账号。
-
-## 常见错误
-
-- `File does not exist: app.py`：当前终端目录不对，先 `cd` 到本项目文件夹。
-- `missing ScriptRunContext`：用了 `python3 app.py`，应该用 `python3 -m streamlit run app.py`。
-- `ModuleNotFoundError: streamlit`：没有安装依赖，先执行 `python3 -m pip install -r requirements.txt`。
-- 同学打不开局域网地址：检查是否同一 Wi-Fi、电脑防火墙是否允许、校园网是否隔离设备。
 
 ## 10分钟展示流程
 
