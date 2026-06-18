@@ -6,7 +6,7 @@
 
 本游戏已部署到 Streamlit Community Cloud，电脑、手机浏览器都能直接打开使用，无需安装任何 Python 环境。
 
-🔗 在线地址：<在此填入你的 Streamlit 应用链接（形如 https://xxx.streamlit.app）>
+🔗 在线地址：https://python-quiz-app-dsp35cudw2tzymqcsnym7w.streamlit.app
 
 ## 选题名称
 
