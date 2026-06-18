@@ -1,0 +1,10 @@
+.DS_Store
+.Rhistory
+__pycache__/
+*.py[cod]
+.~*
+
+# Local export/reference files, not needed for Streamlit deployment.
+*.docx
+*.pdf
+期末复习重点梳理.md
