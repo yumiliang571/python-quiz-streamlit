@@ -1,3 +1,4 @@
+import html
 import random
 
 import streamlit as st
@@ -6,7 +7,8 @@ import streamlit as st
 st.set_page_config(
     page_title="Python期末复习闯关",
     page_icon="🐍",
-    layout="centered",
+    layout="wide",
+    initial_sidebar_state="expanded",
 )
 
 
@@ -1005,12 +1007,773 @@ print(fib(6))''',
         "answer": "r+ 不清空原内容，w+ 会先清空",
         "explain": "两者都能读写；但 r+ 保留原内容，w+ 打开就清空原文件。",
     },
+
+    # ===================================================================
+    # 【扩充新增】取材自「扩充完整版」「普通模式题库」「Python入门60道」docx
+    # 已逐题用 Python 校验答案；个别原题选项/答案有误处已按正确结果修正。
+    # ===================================================================
+
+    # ------------------------- 新增·简单 -------------------------
+    {
+        "level": "简单", "topic": "输出",
+        "question": "Python 中把内容输出到控制台用哪个函数？",
+        "options": ["print()", "input()", "output()", "show()"],
+        "answer": "print()",
+        "explain": "print() 负责输出显示；input() 是读取键盘输入。",
+    },
+    {
+        "level": "简单", "topic": "运算符",
+        "question": "判断整数 num 是否为偶数，正确的条件是？",
+        "options": ["num % 2 == 0", "num / 2 == 0", "num // 2 == 0", "num % 2 == 1"],
+        "answer": "num % 2 == 0",
+        "explain": "偶数除以 2 余 0，用 num % 2 == 0；== 1 判断的是奇数。",
+    },
+    {
+        "level": "简单", "topic": "内置函数",
+        "question": "len('study') 的返回值是？",
+        "options": ["4", "5", "6", "0"],
+        "answer": "5",
+        "explain": "len() 返回字符个数，'study' 共 5 个字母。",
+    },
+    {
+        "level": "简单", "topic": "输入处理",
+        "question": "读入一个整数并能直接参与数学运算，正确写法是？",
+        "options": ["int(input())", "input()", "float()", "str(input())"],
+        "answer": "int(input())",
+        "explain": "input() 读到的永远是字符串，要做整数运算得用 int(input()) 转换。",
+    },
+    {
+        "level": "简单", "topic": "数据类型",
+        "question": "下列属于浮点数（float）类型的是？",
+        "options": ["2.56", "99", "-10", "False"],
+        "answer": "2.56",
+        "explain": "带小数点的是 float；99、-10 是 int，False 是 bool。",
+    },
+    {
+        "level": "简单", "topic": "数据类型",
+        "question": "下列哪一个是整型 int？",
+        "options": ["88", "3.14", "'66'", "True"],
+        "answer": "88",
+        "explain": "88 是整数 int；3.14 是 float，'66' 是 str，True 是 bool。",
+    },
+    {
+        "level": "简单", "topic": "运算符",
+        "question": "print(3 + 4 * 2) 的结果是？",
+        "options": ["11", "14", "7", "9"],
+        "answer": "11",
+        "explain": "先乘除后加减：4*2=8，再 3+8=11。",
+    },
+    {
+        "level": "简单", "topic": "字符串运算符",
+        "question": "print('5' + '3') 的输出是？",
+        "options": ["53", "8", "报错", "5 3"],
+        "answer": "53",
+        "explain": "引号里是字符串，+ 做拼接得到 '53'，不是数字相加。",
+    },
+    {
+        "level": "简单", "topic": "运算符",
+        "question": "表示“大于等于”的运算符是？",
+        "options": [">=", ">", "<", "=>"],
+        "answer": ">=",
+        "explain": ">= 表示大于等于；单个 = 是赋值，=> 在 Python 里不合法。",
+    },
+    {
+        "level": "简单", "topic": "运算符",
+        "question": "a = 5，想让 a 增加 3，下列哪种写法是错误的（a 其实没变）？",
+        "options": ["a + 3", "a += 3", "a = a + 3", "a = 3 + a"],
+        "answer": "a + 3",
+        "explain": "a + 3 只算出 8 却没赋回去，a 仍是 5；要写 a += 3 或 a = a + 3。",
+    },
+    {
+        "level": "简单", "topic": "变量与赋值",
+        "question": "同时给 a 赋 1、b 赋 2，正确的简写是？",
+        "options": ["a, b = 1, 2", "a = 1 b = 2", "a := 1, b := 2", "a; b = 1; 2"],
+        "answer": "a, b = 1, 2",
+        "explain": "一行多赋值写成 a, b = 1, 2；写成 a=1 b=2 缺少分隔会报错。",
+    },
+    {
+        "level": "简单", "topic": "运算符",
+        "question": "判断两个值是否相等，使用哪个运算符？",
+        "options": ["==", "=", "===", "=>"],
+        "answer": "==",
+        "explain": "== 比较是否相等；单个 = 是赋值，Python 没有 ===。",
+    },
+    {
+        "level": "简单", "topic": "布尔判断",
+        "question": "下列哪个表达式的结果为 False？",
+        "options": ["10 < 5", "5 > 2", "3 == 3", "2 != 3"],
+        "answer": "10 < 5",
+        "explain": "10 < 5 不成立，结果 False；其余三项都为 True。",
+    },
+    {
+        "level": "简单", "topic": "流程控制",
+        "question": "当条件成立时反复执行，使用哪个关键字？",
+        "options": ["while", "if", "def", "return"],
+        "answer": "while",
+        "explain": "while 在条件为真时反复执行；for 用于遍历序列。",
+    },
+    {
+        "level": "简单", "topic": "类型转换",
+        "question": "print(int(7.9)) 的输出是？",
+        "options": ["7", "8", "7.9", "报错"],
+        "answer": "7",
+        "explain": "int() 直接截掉小数部分（向 0 取整），不是四舍五入，所以是 7。",
+    },
+    {
+        "level": "简单", "topic": "布尔判断",
+        "question": "not False 的结果是？",
+        "options": ["True", "False", "0", "None"],
+        "answer": "True",
+        "explain": "not 取反，False 取反就是 True。",
+    },
+    {
+        "level": "简单", "topic": "布尔值",
+        "question": "bool('abc') 的结果是？",
+        "options": ["True", "False", "'abc'", "0"],
+        "answer": "True",
+        "explain": "非空字符串为真，bool('abc') 是 True；只有空串 '' 才是 False。",
+    },
+    {
+        "level": "简单", "topic": "布尔值",
+        "question": "下列转成 bool 后结果为 True 的是？",
+        "options": ["bool(-5)", "bool('')", "bool([])", "bool(0)"],
+        "answer": "bool(-5)",
+        "explain": "只有 0、空字符串、空容器为假；-5 非 0，bool(-5) 为 True。",
+    },
+    {
+        "level": "简单", "topic": "流程控制",
+        "question": "list(range(2, 7)) 的结果是？",
+        "options": ["[2, 3, 4, 5, 6]", "[2, 3, 4, 5, 6, 7]", "[0, 1, 2, 3, 4, 5, 6]", "[2, 7]"],
+        "answer": "[2, 3, 4, 5, 6]",
+        "explain": "range(2, 7) 含 2 不含 7，得到 2、3、4、5、6。",
+    },
+    {
+        "level": "简单", "topic": "布尔值",
+        "question": "bool(set()) 的结果是？",
+        "options": ["False", "True", "set()", "1"],
+        "answer": "False",
+        "explain": "空集合视为假，bool(set()) 为 False；非空集合才是 True。",
+    },
+
+    # ------------------------- 新增·普通 -------------------------
+    {
+        "level": "普通", "topic": "字符串方法",
+        "question": "'apple'.replace('p', 'm') 的结果是？",
+        "options": ["ammle", "amle", "ample", "aMMle"],
+        "answer": "ammle",
+        "explain": "replace 替换全部匹配字符，'apple' 里两个 p 都变 m → 'ammle'。",
+    },
+    {
+        "level": "普通", "topic": "字典",
+        "question": "dic = {'name': 'Tom', 'age': 18}，删除键 'age' 的正确语句是？",
+        "options": ["del dic['age']", "del dic(age)", "remove dic['age']", "dic.popitem()"],
+        "answer": "del dic['age']",
+        "explain": "del 字典[键] 删除指定键值对；popitem() 删的是末尾一项，不一定是 age。",
+    },
+    {
+        "level": "普通", "topic": "复合赋值",
+        "question": "a = 5; a *= 3，执行后 a 的值是？",
+        "options": ["15", "5", "8", "53"],
+        "answer": "15",
+        "explain": "a *= 3 等价于 a = a * 3，5×3 = 15。",
+    },
+    {
+        "level": "普通", "topic": "布尔判断",
+        "question": "下列表达式结果为 False 的是？",
+        "options": ["7 >= 7 and ''", "10 > 2 or 3 < 1", "not 0", "bool([1, 2])"],
+        "answer": "7 >= 7 and ''",
+        "explain": "and 要两边都真；7>=7 为真但 '' 为假，结果取 '' 即假。其余都为 True。",
+    },
+    {
+        "level": "普通", "topic": "流程控制",
+        "question": "list(range(-2, 3)) 的结果是？",
+        "options": ["[-2, -1, 0, 1, 2]", "[-2, -1, 0, 1, 2, 3]", "[0, 1, 2]", "[-2, -1]"],
+        "answer": "[-2, -1, 0, 1, 2]",
+        "explain": "range 可从负数开始，含 -2 不含 3，得到 -2,-1,0,1,2。",
+    },
+    {
+        "level": "普通", "topic": "代码阅读·条件",
+        "question": "阅读代码，输出是什么？",
+        "code": '''score = 75
+if score >= 90:
+    print("A")
+elif score >= 60:
+    print("B")
+else:
+    print("C")''',
+        "options": ["B", "A", "C", "无输出"],
+        "answer": "B",
+        "explain": "75 不满足 >=90，但满足 >=60，走 elif 分支输出 B。",
+    },
+    {
+        "level": "普通", "topic": "切片",
+        "question": "lst = [10, 20, 30, 40, 50]，lst[1:-2] 的结果是？",
+        "options": ["[20, 30]", "[20, 30, 40]", "[10, 20, 30]", "[30, 40]"],
+        "answer": "[20, 30]",
+        "explain": "-2 指倒数第 2 个（40）的位置，切片不含末端，取索引 1、2 → [20, 30]。",
+    },
+    {
+        "level": "普通", "topic": "函数",
+        "question": "定义一个无参数、无返回值的函数，正确写法是？",
+        "options": ["def func(): pass", "function func():", "func = def()", "define func()"],
+        "answer": "def func(): pass",
+        "explain": "用 def 定义函数，函数体可用 pass 占位表示暂时什么都不做。",
+    },
+    {
+        "level": "普通", "topic": "运算符",
+        "question": "15 // 2 和 15 / 2 的结果分别是？",
+        "options": ["7 和 7.5", "7.0 和 7", "7.5 和 7", "8 和 7.5"],
+        "answer": "7 和 7.5",
+        "explain": "// 整除得整数 7；/ 是真除法得浮点 7.5。",
+    },
+    {
+        "level": "普通", "topic": "代码阅读·循环",
+        "question": "阅读代码，打印出的数字是？",
+        "code": '''for i in range(4):
+    if i == 2:
+        continue
+    print(i)''',
+        "options": ["0 1 3", "0 1 2 3", "2", "0 1"],
+        "answer": "0 1 3",
+        "explain": "i==2 时 continue 跳过本次 print，所以打印 0、1、3。",
+    },
+    {
+        "level": "普通", "topic": "类型转换",
+        "question": "下列哪行代码运行会直接报错？",
+        "options": ["int('3.14')", "int('66')", "float('9.9')", "str(123)"],
+        "answer": "int('3.14')",
+        "explain": "int() 不能直接转带小数点的字符串，int('3.14') 抛 ValueError；需先 float('3.14')。",
+    },
+    {
+        "level": "普通", "topic": "运算符",
+        "question": "表达式 3 > 1 or 5 < 0 and 2 == 2 的结果是？",
+        "options": ["True", "False", "0", "报错"],
+        "answer": "True",
+        "explain": "and 优先级高于 or：先算 5<0 and 2==2 为 False，再 True or False 为 True。",
+    },
+    {
+        "level": "普通", "topic": "代码阅读·循环",
+        "question": "阅读代码，最终打印 i 的值是？",
+        "code": '''i = 0
+while i < 3:
+    i += 1
+print(i)''',
+        "options": ["3", "0", "2", "4"],
+        "answer": "3",
+        "explain": "i 从 0 每次 +1，到 3 时 3<3 不成立退出，print(i) 输出 3。",
+    },
+    {
+        "level": "普通", "topic": "代码阅读·循环",
+        "question": "阅读代码，输出结果是？",
+        "code": '''for i in range(10):
+    if i == 4:
+        break
+print(i)''',
+        "options": ["4", "3", "9", "10"],
+        "answer": "4",
+        "explain": "i 到 4 时 break 跳出循环，此时 i 已是 4，print 输出 4。",
+    },
+    {
+        "level": "普通", "topic": "列表方法",
+        "question": "lst = [10, 20, 30]，执行 lst.pop(1) 的返回值和列表变化是？",
+        "options": [
+            "返回 20，列表变为 [10, 30]",
+            "返回 10，列表变为 [20, 30]",
+            "返回 30，删除末尾元素",
+            "报错，pop 不能传参数",
+        ],
+        "answer": "返回 20，列表变为 [10, 30]",
+        "explain": "pop(1) 删除并返回索引 1 的元素 20，列表剩 [10, 30]。",
+    },
+    {
+        "level": "普通", "topic": "字符串",
+        "question": "下列哪种写法可以表示跨多行的字符串？",
+        "options": ["用三引号包裹", "用单引号包裹", "用 + 连接", "用逗号分隔"],
+        "answer": "用三引号包裹",
+        "explain": "三引号 ''' ''' 或三个双引号可写多行字符串；单引号、双引号只能写单行。",
+    },
+    {
+        "level": "普通", "topic": "代码阅读·函数",
+        "question": "阅读代码，打印结果是？",
+        "code": '''def add(x, y):
+    return x + y
+
+res = add(2, 5)
+print(res)''',
+        "options": ["7", "25", "'7'", "None"],
+        "answer": "7",
+        "explain": "函数返回 2+5=7，print 输出整数 7（不是字符串 '7'）。",
+    },
+    {
+        "level": "普通", "topic": "集合",
+        "question": "关于集合 set，下列描述错误的是？",
+        "options": ["可以通过 set[0] 取值", "元素不允许重复", "元素无序", "用 {} 或 set() 创建"],
+        "answer": "可以通过 set[0] 取值",
+        "explain": "集合无序、不支持下标，set[0] 会报错；它确实自动去重、无序。",
+    },
+    {
+        "level": "普通", "topic": "字符串格式化",
+        "question": "name = '小李'，要用 f-string 输出“我的名字：小李”，正确写法是？",
+        "options": [
+            'print(f"我的名字：{name}")',
+            'print("我的名字：{name}")',
+            'print(f"我的名字：name")',
+            'print("我的名字：" + name)',
+        ],
+        "answer": 'print(f"我的名字：{name}")',
+        "explain": "f-string 要加前缀 f 且变量放进 {} 中：f\"我的名字：{name}\"。",
+    },
+    {
+        "level": "普通", "topic": "列表方法",
+        "question": "lst = [1, 3, 5]，执行 lst.append([7, 9]) 后列表长度为？",
+        "options": ["4", "3", "5", "6"],
+        "answer": "4",
+        "explain": "append 把 [7, 9] 当成一个元素加入，长度从 3 变 4（最后一项是子列表）。",
+    },
+    {
+        "level": "普通", "topic": "元组",
+        "question": "t = (8)，print(type(t)) 显示的类型是？",
+        "options": ["int", "tuple", "list", "str"],
+        "answer": "int",
+        "explain": "(8) 只是加了括号的整数；单元素元组必须写成 (8,) 带逗号才是 tuple。",
+    },
+    {
+        "level": "普通", "topic": "列表方法",
+        "question": "要删除列表中下标为 3 的元素，正确操作是？",
+        "options": ["del lst[3]", "lst.remove(3)", "lst.pop()", "clear(lst[3])"],
+        "answer": "del lst[3]",
+        "explain": "del lst[3] 按下标删；remove(3) 删的是“值为 3”的元素，含义不同。",
+    },
+    {
+        "level": "普通", "topic": "字典",
+        "question": "d = {'a': 1, 'b': 2}，d.items() 返回的是？",
+        "options": ["键值对组合", "所有键", "所有值", "字典长度"],
+        "answer": "键值对组合",
+        "explain": "items() 返回 (键, 值) 形式的键值对；keys() 只返回键，values() 只返回值。",
+    },
+    {
+        "level": "普通", "topic": "字典",
+        "question": "只遍历字典中所有的“键”，使用哪个方法？",
+        "options": ["d.keys()", "d.values()", "d.items()", "d.all()"],
+        "answer": "d.keys()",
+        "explain": "keys() 返回所有键；values() 返回所有值，items() 返回键值对。",
+    },
+    {
+        "level": "普通", "topic": "循环",
+        "question": "for i in range(len(lst)) 这种写法常用来做什么？",
+        "options": ["获取列表下标", "直接取列表值", "生成随机数", "反转字符串"],
+        "answer": "获取列表下标",
+        "explain": "range(len(lst)) 生成 0..len-1，即每个元素的下标，再用 lst[i] 取值。",
+    },
+    {
+        "level": "普通", "topic": "字典",
+        "question": "判断键 key 是否在字典 d 中，正确写法是？",
+        "options": ["if key in d:", "if key == d:", "if key of d:", "if key is d:"],
+        "answer": "if key in d:",
+        "explain": "in 判断键是否存在，可避免直接取值触发 KeyError。",
+    },
+    {
+        "level": "普通", "topic": "内置函数",
+        "question": "max([3, 9, 1, 5]) 的返回值是？",
+        "options": ["9", "1", "3", "5"],
+        "answer": "9",
+        "explain": "max() 返回最大值 9；对应 min() 返回最小值。",
+    },
+    {
+        "level": "普通", "topic": "内置函数",
+        "question": "min([3, 9, 1, 5]) 的返回值是？",
+        "options": ["1", "9", "3", "5"],
+        "answer": "1",
+        "explain": "min() 返回最小值 1。",
+    },
+    {
+        "level": "普通", "topic": "列表推导式",
+        "question": "[x * 3 for x in range(4)] 的结果是？",
+        "options": ["[0, 3, 6, 9]", "[1, 3, 6, 9]", "[3, 6, 9, 12]", "[0, 1, 2, 3]"],
+        "answer": "[0, 3, 6, 9]",
+        "explain": "range(4) 是 0,1,2,3，各乘 3 得 [0, 3, 6, 9]。",
+    },
+    {
+        "level": "普通", "topic": "列表推导式",
+        "question": "生成 1~10 之间的偶数列表，正确的推导式是？",
+        "options": [
+            "[x for x in range(1, 11) if x % 2 == 0]",
+            "[x for x in range(1, 11) if x % 2 == 1]",
+            "[x * 2 for x in range(10)]",
+            "[x for x in range(1, 10)]",
+        ],
+        "answer": "[x for x in range(1, 11) if x % 2 == 0]",
+        "explain": "加 if x%2==0 过滤偶数，range(1,11) 取 1~10，得到 [2, 4, 6, 8, 10]。",
+    },
+    {
+        "level": "普通", "topic": "语法",
+        "question": "pass 语句的作用是？",
+        "options": ["占位，什么都不做", "终止循环", "返回数值", "跳过本次循环"],
+        "answer": "占位，什么都不做",
+        "explain": "pass 是空操作占位符，用在语法上需要语句但暂时不写内容的地方。",
+    },
+    {
+        "level": "普通", "topic": "字符串方法",
+        "question": "'python'.upper() 的结果是？",
+        "options": ["PYTHON", "python", "Python", "PyThOn"],
+        "answer": "PYTHON",
+        "explain": "upper() 把字母全部转大写；lower() 转小写。",
+    },
+    {
+        "level": "普通", "topic": "内置函数",
+        "question": "round(4.62, 1) 的结果是？",
+        "options": ["4.6", "4.7", "5", "4"],
+        "answer": "4.6",
+        "explain": "round(x, 1) 保留 1 位小数，4.62 → 4.6。",
+    },
+    {
+        "level": "普通", "topic": "集合",
+        "question": "集合 set 的核心特点是？",
+        "options": ["无序且元素不重复", "有序且允许重复", "支持下标索引取值", "只能存放数字"],
+        "answer": "无序且元素不重复",
+        "explain": "集合自动去重且无序，不能用下标取值。",
+    },
+    {
+        "level": "普通", "topic": "列表方法",
+        "question": "lst = [5, 1, 3]，执行 lst.sort() 后列表是？",
+        "options": ["[1, 3, 5]", "[5, 3, 1]", "[5, 1, 3]", "不变"],
+        "answer": "[1, 3, 5]",
+        "explain": "sort() 原地升序排序，列表变为 [1, 3, 5]，返回值是 None。",
+    },
+    {
+        "level": "普通", "topic": "字符串方法",
+        "question": "不带参数的 split() 默认按什么分割字符串？",
+        "options": ["空格（空白字符）", "逗号", "换行", "句号"],
+        "answer": "空格（空白字符）",
+        "explain": "不带参数的 split() 按任意空白（空格/制表/换行）切分。",
+    },
+    {
+        "level": "普通", "topic": "函数",
+        "question": "在函数内部修改全局变量，需要先用哪个关键字声明？",
+        "options": ["global", "local", "var", "static"],
+        "answer": "global",
+        "explain": "要在函数里给全局变量重新赋值，得先写 global 变量名，否则会被当成局部变量。",
+    },
+    {
+        "level": "普通", "topic": "输出",
+        "question": "print('test', end='') 与默认 print 相比，不会自动添加什么？",
+        "options": ["换行符 \\n", "空格", "逗号", "制表符 \\t"],
+        "answer": "换行符 \\n",
+        "explain": "print 默认在末尾加换行符；end='' 取消换行，让下次输出接在同一行。",
+    },
+
+    # ------------------- 新增·挑战（算法与概念） -------------------
+    {
+        "level": "挑战", "topic": "算法",
+        "question": "二分查找（折半查找）算法只能用于哪种数组？",
+        "options": ["有序数组", "无序数组", "嵌套数组", "空数组"],
+        "answer": "有序数组",
+        "explain": "二分查找每次比较中间值来缩小范围，前提是数组已经有序。",
+    },
+    {
+        "level": "挑战", "topic": "算法复杂度",
+        "question": "时间复杂度 O(log n) 通常对应下列哪个算法？",
+        "options": ["二分查找", "顺序遍历", "冒泡排序", "暴力枚举"],
+        "answer": "二分查找",
+        "explain": "二分查找每次把范围减半，比较次数约 log₂n，复杂度 O(log n)。",
+    },
+    {
+        "level": "挑战", "topic": "算法复杂度",
+        "question": "冒泡排序的时间复杂度是？",
+        "options": ["O(n²)", "O(1)", "O(log n)", "O(n)"],
+        "answer": "O(n²)",
+        "explain": "冒泡排序两层嵌套循环，平均和最坏时间复杂度都是 O(n²)。",
+    },
+    {
+        "level": "挑战", "topic": "排序",
+        "question": "快速排序的核心思想是？",
+        "options": ["选基准划分 + 分治递归", "相邻元素逐个交换", "从头到尾顺序查找", "递归累加求和"],
+        "answer": "选基准划分 + 分治递归",
+        "explain": "快排选一个基准，把更小/更大的元素分到两边（划分），再对两边递归，属于分治法。",
+    },
+    {
+        "level": "挑战", "topic": "数论",
+        "question": "完数（完美数）的定义是？",
+        "options": ["所有真因数之和等于自身", "全部因数之和等于自身", "只能被 1 整除", "各位立方和等于自身"],
+        "answer": "所有真因数之和等于自身",
+        "explain": "完数等于它所有真因数（不含自身）之和，例如 6 = 1 + 2 + 3。",
+    },
+    {
+        "level": "挑战", "topic": "字符串算法",
+        "question": "回文字符串指的是？",
+        "options": ["正读反读完全一致", "全部由数字组成", "长度一定是偶数", "不含大写字母"],
+        "answer": "正读反读完全一致",
+        "explain": "回文正读反读相同，如 'level'、'aba'；可用 s == s[::-1] 判断。",
+    },
+    {
+        "level": "挑战", "topic": "集合",
+        "question": "给列表去重，最快的数据结构转换是？",
+        "options": ["转成集合 set", "转成元组", "转成字符串", "转成字典的值"],
+        "answer": "转成集合 set",
+        "explain": "set() 自动去重、查重接近 O(1)，list(set(lst)) 是最快的去重写法（不保序）。",
+    },
+    {
+        "level": "挑战", "topic": "集合",
+        "question": "“哈希去重”在 Python 中通常对应哪种数据结构？",
+        "options": ["set", "list", "tuple", "str"],
+        "answer": "set",
+        "explain": "set/dict 底层是哈希表，成员判断快，适合去重和查重。",
+    },
+    {
+        "level": "挑战", "topic": "算法",
+        "question": "下列哪一项属于“空间换时间”的优化思路？",
+        "options": ["用哈希表记录已遍历的值", "二分查找", "冒泡排序", "顺序循环逐个比较"],
+        "answer": "用哈希表记录已遍历的值",
+        "explain": "用额外的集合/字典记录已出现的值，用空间换取查找时间，是典型的空间换时间。",
+    },
+    {
+        "level": "挑战", "topic": "应用",
+        "question": "常见的密码强度校验，一般“不”要求下列哪一项？",
+        "options": ["必须包含空格", "长度不少于 8 位", "包含大写字母", "包含数字"],
+        "answer": "必须包含空格",
+        "explain": "强密码常要求长度、大小写、数字、符号，但一般不要求“必须含空格”。",
+    },
+    {
+        "level": "挑战", "topic": "应用",
+        "question": "18 位身份证号的最后一位校验码，可能出现的特殊字符是？",
+        "options": ["X", "Y", "Z", "Q"],
+        "answer": "X",
+        "explain": "校验码若计算结果为 10，用罗马数字 X 表示，所以末位可能是 X。",
+    },
+    {
+        "level": "挑战", "topic": "算法",
+        "question": "解决“三数之和”问题，常用的第一步操作是？",
+        "options": ["先对数组排序", "先反转数组", "先转成集合", "先统计长度"],
+        "answer": "先对数组排序",
+        "explain": "先排序便于用双指针向中间逼近并跳过重复值，是三数之和的常用第一步。",
+    },
+
+    # ------------- 新增·代码阅读（挑战，源自「扩充完整版」表格代码）-------------
+    {
+        "level": "挑战", "topic": "代码阅读·变量赋值",
+        "question": "阅读代码，print(b) 输出什么？",
+        "code": '''a = 12
+b = a
+a = 50
+print(b)''',
+        "options": ["12", "50", "0", "报错"],
+        "answer": "12",
+        "explain": "b = a 时把 12 赋给 b；之后 a 改成 50 不影响已赋值的 b，输出 12。",
+    },
+    {
+        "level": "挑战", "topic": "代码阅读·切片",
+        "question": "阅读代码，print(s[:4]) 输出什么？",
+        "code": '''s = "programming"
+print(s[:4])''',
+        "options": ["prog", "progr", "gram", "pro"],
+        "answer": "prog",
+        "explain": "s[:4] 取前 4 个字符（索引 0~3），得到 'prog'。",
+    },
+    {
+        "level": "挑战", "topic": "代码阅读·参数传递",
+        "question": "阅读代码，print(num) 输出什么？",
+        "code": '''def add(x):
+    x += 10
+
+num = 20
+add(num)
+print(num)''',
+        "options": ["20", "30", "10", "报错"],
+        "answer": "20",
+        "explain": "整数不可变，函数内 x += 10 只改局部副本，原 num 仍是 20。",
+    },
+    {
+        "level": "挑战", "topic": "代码阅读·运算符",
+        "question": "阅读代码，print(res) 输出什么？",
+        "code": '''res = 14 // 3 + 2 ** 3
+print(res)''',
+        "options": ["12", "10", "13", "9"],
+        "answer": "12",
+        "explain": "先幂 2**3=8，再整除 14//3=4，最后 4+8=12（** 高于 //，// 高于 +）。",
+    },
+    {
+        "level": "挑战", "topic": "代码阅读·循环",
+        "question": "阅读代码，输出是什么？",
+        "code": '''for i in range(4, 15, 5):
+    print(i, end=" ")''',
+        "options": ["4 9 14", "4 5 6", "5 10 15", "4 8 12"],
+        "answer": "4 9 14",
+        "explain": "从 4 起、步长 5：4、9、14（下一个 19≥15 停），end=' ' 同行空格分隔。",
+    },
+    {
+        "level": "挑战", "topic": "代码阅读·递归",
+        "question": "阅读代码，print(sum_all(5)) 输出什么？",
+        "code": '''def sum_all(n):
+    if n == 1:
+        return 1
+    return n + sum_all(n - 1)
+
+print(sum_all(5))''',
+        "options": ["15", "5", "10", "8"],
+        "answer": "15",
+        "explain": "1+2+3+4+5=15，递归到 n==1 返回 1，再逐层累加。",
+    },
+    {
+        "level": "挑战", "topic": "代码阅读·列表推导式",
+        "question": "阅读代码，print(new) 输出什么？",
+        "code": '''lst = [4, 6, 8, 10]
+new = [x // 2 for x in lst]
+print(new)''',
+        "options": ["[2, 3, 4, 5]", "[8, 12, 16, 20]", "[0, 0, 0, 0]", "[4, 6, 8, 10]"],
+        "answer": "[2, 3, 4, 5]",
+        "explain": "各元素整除 2：4→2, 6→3, 8→4, 10→5。",
+    },
+    {
+        "level": "挑战", "topic": "代码阅读·转义字符",
+        "question": "阅读代码，输出是什么？",
+        "code": '''print("apple\\nbanana\\npear")''',
+        "options": ["分三行输出三个单词", "一行输出全部文字", "原样输出 apple\\nbanana\\npear", "运行报错"],
+        "answer": "分三行输出三个单词",
+        "explain": "\\n 是换行符，apple、banana、pear 分三行输出。",
+    },
+    {
+        "level": "挑战", "topic": "代码阅读·条件",
+        "question": "阅读代码，输出是什么？",
+        "code": '''x = 3
+if x > 5:
+    print("大")
+else:
+    print("小")''',
+        "options": ["小", "大", "无输出", "报错"],
+        "answer": "小",
+        "explain": "3 > 5 不成立，走 else 输出“小”。",
+    },
+    {
+        "level": "挑战", "topic": "代码阅读·循环",
+        "question": "阅读代码，print(count) 输出什么？",
+        "code": '''count = 0
+for i in range(1, 4):
+    count += 1
+print(count)''',
+        "options": ["3", "1", "4", "0"],
+        "answer": "3",
+        "explain": "range(1, 4) 循环 3 次，count 从 0 累加到 3。",
+    },
+    {
+        "level": "挑战", "topic": "代码阅读·字典",
+        "question": "阅读代码，print(d.get('z', 0)) 输出什么？",
+        "code": '''d = {"x": 10, "y": 20}
+print(d.get("z", 0))''',
+        "options": ["0", "10", "20", "报错"],
+        "answer": "0",
+        "explain": "键 'z' 不存在，get 返回默认值 0，不会报错。",
+    },
+    {
+        "level": "挑战", "topic": "代码阅读·交换",
+        "question": "阅读代码，print(a, b) 输出什么？",
+        "code": '''a, b = 7, 9
+a, b = b, a
+print(a, b)''',
+        "options": ["9 7", "7 9", "7 7", "9 9"],
+        "answer": "9 7",
+        "explain": "a, b = b, a 同时交换，a 变 9、b 变 7。",
+    },
+    {
+        "level": "挑战", "topic": "代码阅读·索引",
+        "question": "阅读代码，print(word[-2]) 输出什么？",
+        "code": '''word = "test"
+print(word[-2])''',
+        "options": ["s", "t", "e", "报错"],
+        "answer": "s",
+        "explain": "-2 是倒数第 2 个字符，'test' 倒数第二个是 's'。",
+    },
+    {
+        "level": "挑战", "topic": "代码阅读·循环累加",
+        "question": "阅读代码，print(total) 输出什么？",
+        "code": '''total = 0
+for i in [1, 2, 3]:
+    total = total + i
+print(total)''',
+        "options": ["6", "3", "5", "0"],
+        "answer": "6",
+        "explain": "依次累加 1+2+3 = 6。",
+    },
+    {
+        "level": "挑战", "topic": "代码阅读·布尔",
+        "question": "阅读代码，输出是什么？",
+        "code": '''flag = False
+if not flag:
+    print("yes")
+else:
+    print("no")''',
+        "options": ["yes", "no", "无输出", "报错"],
+        "answer": "yes",
+        "explain": "not False 为 True，进入 if 输出 'yes'。",
+    },
 ]
 
 
-LEVEL_SIZE = {"简单": 5, "普通": 8, "挑战": 10}
+# 每个难度默认抽题量（可在侧边栏用滑块调整）
+LEVEL_SIZE = {"简单": 10, "普通": 12, "挑战": 15}
+DIFF_TAG = {"简单": "🌱 简单", "普通": "📘 普通", "挑战": "⚡ 挑战"}
 
 
+# ===================================================================
+# 主题样式：取自「界面设计描述词」清新蓝白主题
+# 分色选项 A蓝 / B绿 / C橙 / D粉，渐变大标题，圆角卡片，柔和阴影
+# ===================================================================
+st.markdown(
+    """
+    <style>
+    .stApp { background: linear-gradient(145deg, #f0f7ff 0%, #e6f0fa 100%); }
+    .big-title {
+        font-size: 34px; font-weight: 800; line-height: 1.2; letter-spacing: 0.5px;
+        background: linear-gradient(135deg, #1a3b5d 0%, #3776AB 45%, #5A9FD4 70%, #7BB3E0 100%);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        margin-bottom: 0.1rem;
+    }
+    .subtitle { color: #2c4a6e; font-size: 15px; margin-bottom: 0.2rem; }
+    .quiz-card {
+        background: rgba(255,255,255,0.75); border-radius: 28px; padding: 22px 26px 6px;
+        box-shadow: 0 8px 32px rgba(60,100,177,0.06); border: 1px solid rgba(255,255,255,0.7);
+        margin-top: 0.4rem;
+    }
+    .q-number { font-size: 17px; font-weight: 700; color: #1a3b5d;
+        background: rgba(55,118,171,0.08); padding: 3px 16px; border-radius: 40px; }
+    .q-tag { font-size: 13px; font-weight: 600; padding: 3px 14px; border-radius: 40px;
+        background: rgba(90,159,212,0.12); color: #2c6b9e; margin-left: 8px; }
+    .q-text { font-size: 20px; font-weight: 600; color: #0f2a44; line-height: 1.5; margin: 14px 0 6px; }
+    /* 分色选项 A蓝 B绿 C橙 D粉 */
+    div[role="radiogroup"] label {
+        border-radius: 16px !important; padding: 11px 18px !important; margin-bottom: 10px !important;
+        border: 2px solid transparent !important; box-shadow: 0 2px 6px rgba(0,0,0,0.02) !important;
+        transition: all .15s !important; width: 100% !important;
+    }
+    div[role="radiogroup"] label:hover {
+        transform: translateY(-2px) !important; box-shadow: 0 8px 20px rgba(60,100,177,0.10) !important;
+    }
+    div[role="radiogroup"] label:nth-of-type(1) { background: #E3F2FD !important; }
+    div[role="radiogroup"] label:nth-of-type(2) { background: #E8F5E9 !important; }
+    div[role="radiogroup"] label:nth-of-type(3) { background: #FFF3E0 !important; }
+    div[role="radiogroup"] label:nth-of-type(4) { background: #FCE4EC !important; }
+    /* 按钮 */
+    .stButton > button { border-radius: 16px !important; font-weight: 600 !important;
+        border: none !important; transition: all .2s !important; }
+    .stButton > button[kind="primary"] {
+        background: linear-gradient(135deg, #3776AB, #4A8EC7) !important; color: #fff !important;
+        box-shadow: 0 4px 16px rgba(55,118,171,0.20) !important; }
+    .stButton > button[kind="primary"]:hover { transform: translateY(-2px) !important; }
+    /* 侧边栏分数面板 */
+    .score-panel { background: linear-gradient(135deg, rgba(55,118,171,0.06), rgba(90,159,212,0.10));
+        border-radius: 18px; padding: 16px; margin: 8px 0 12px; border: 1px solid rgba(55,118,171,0.08); }
+    .score-panel .row { display: flex; justify-content: space-between; align-items: center; padding: 2px 0; }
+    .score-panel .label { font-size: 14px; color: #2c4a6e; font-weight: 500; }
+    .score-panel .value { font-size: 22px; font-weight: 800; color: #3776AB; }
+    .score-panel .sub { font-size: 13px; color: #4f7a9e; display: flex;
+        justify-content: space-between; margin-top: 8px; }
+    .score-panel .sub span { font-weight: 600; }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+
+# ----------------------------- 抽题 / 评分逻辑 -----------------------------
 def candidates_for(level):
     """该难度可抽的题池：简单只含简单；普通含简单+普通；挑战三档都有。"""
     allowed = ["简单"]
@@ -1021,17 +1784,9 @@ def candidates_for(level):
     return [q for q in QUESTION_BANK if q["level"] in allowed]
 
 
-def build_quiz(level, count):
-    """从该难度题池里随机抽 count 道题（不超过题池上限）。"""
-    pool = candidates_for(level)
-    count = max(1, min(count, len(pool)))
-    return random.sample(pool, count)
-
-
-def get_title(score, total):
-    """根据得分率返回称号。"""
-    rate = score / total if total else 0
-    if rate == 1:
+def get_title(rate):
+    """按正确率返回称号。"""
+    if rate >= 1:
         return "Python 满分闯关王 🏆"
     if rate >= 0.8:
         return "基础很稳的同学 💪"
@@ -1041,33 +1796,36 @@ def get_title(score, total):
 
 
 def start_new_quiz(level, count):
-    """生成一套新题；quiz_id +1 让单选框的 key 变化，自动清掉上一轮的选择。"""
-    st.session_state.quiz = build_quiz(level, count)
-    st.session_state.current_level = level
-    st.session_state.current_count = count
-    st.session_state.submitted = False
-    st.session_state.quiz_id += 1
+    """生成一套新题并重置本轮所有进度。"""
+    pool = candidates_for(level)
+    count = max(1, min(count, len(pool)))
+    st.session_state.quiz = random.sample(pool, count)
+    st.session_state.level = level
+    st.session_state.count = count
+    st.session_state.idx = 0          # 当前第几题（从 0 起）
+    st.session_state.answered = False  # 当前题是否已提交
+    st.session_state.selected = None   # 当前题所选答案
+    st.session_state.correct = 0
+    st.session_state.wrong = 0
+    st.session_state.topic_total = {}  # 各知识点出现次数
+    st.session_state.topic_right = {}  # 各知识点答对次数
+    st.session_state.completed = False
+    st.session_state.quiz_id = st.session_state.get("quiz_id", 0) + 1
 
 
-# ----------------------- 初始化会话状态 -----------------------
-if "quiz_id" not in st.session_state:
-    st.session_state.quiz_id = 0
-if "current_level" not in st.session_state:
-    st.session_state.current_level = "简单"
-if "current_count" not in st.session_state:
-    st.session_state.current_count = 0
-if "submitted" not in st.session_state:
-    st.session_state.submitted = False
+# ----------------------------- 初始化 -----------------------------
 if "quiz" not in st.session_state:
-    st.session_state.quiz = []
+    start_new_quiz("简单", LEVEL_SIZE["简单"])
 
 
-st.title("🐍 Python 期末复习闯关")
-st.caption("题目取材自本课程的实验、随堂与课后作业。选难度 → 答题 → 自动评分 + 解析 + 知识点得分。")
-
+# ----------------------------- 侧边栏 -----------------------------
 with st.sidebar:
-    st.header("闯关设置")
-    level = st.radio("选择难度", ["简单", "普通", "挑战"], horizontal=True)
+    st.markdown("### 🐍 Python 答题闯关")
+    level = st.radio(
+        "难度模式",
+        ["简单", "普通", "挑战"],
+        index=["简单", "普通", "挑战"].index(st.session_state.level),
+    )
     pool_size = len(candidates_for(level))
     num = st.slider(
         "本次题量",
@@ -1075,82 +1833,158 @@ with st.sidebar:
         max_value=pool_size,
         value=min(LEVEL_SIZE[level], pool_size),
         key=f"num_{level}",
-        help="拖动调节这一次要复习多少题；上限就是该难度题库的全部题量。",
+        help="拖动调节这一次闯多少关；上限就是该难度题库的全部题量。",
     )
-    st.caption(f"{level}模式题库共 {pool_size} 题，本次抽 {num} 题")
-    st.write("知识点：变量、运算符、字符串、列表/字典/集合、循环、函数、递归、二维列表、排序、文件异常")
-    if st.button("🔄 重新抽题", use_container_width=True):
+    # 切换难度或调节题量 → 自动换一套题
+    if level != st.session_state.level or num != st.session_state.count:
         start_new_quiz(level, num)
+        st.rerun()
 
-# 切换难度或调节题量，就自动换一套题
-if st.session_state.current_level != level or st.session_state.current_count != num:
-    start_new_quiz(level, num)
-# 首次进入、或被重置后还没有题，则生成一套
-if not st.session_state.quiz:
-    start_new_quiz(level, num)
+    answered_n = st.session_state.correct + st.session_state.wrong
+    total_n = len(st.session_state.quiz)
+    acc = round(st.session_state.correct / answered_n * 100) if answered_n else 0
+    st.markdown(
+        f"""
+        <div class="score-panel">
+            <div class="row"><span class="label">⭐ 得分</span>
+                <span class="value">{st.session_state.correct * 10}</span></div>
+            <div class="sub">
+                <span>✅ 正确 {st.session_state.correct}</span>
+                <span>❌ 错误 {st.session_state.wrong}</span>
+                <span>📝 {answered_n}/{total_n}</span>
+            </div>
+            <div class="sub"><span>正确率</span><span>{acc}%</span></div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
-st.subheader(f"{level}模式：共 {len(st.session_state.quiz)} 题")
+    if st.button("🔄 重新开始", use_container_width=True):
+        start_new_quiz(level, num)
+        st.rerun()
 
-qid = st.session_state.quiz_id
-with st.form("quiz_form"):
-    for index, item in enumerate(st.session_state.quiz, start=1):
-        st.markdown(f"**第 {index} 题　[{item['topic']}]**")
-        st.write(item["question"])
-        if item.get("code"):                 # 代码填空题：展示带 ____ 的代码块
-            st.code(item["code"], language="python")
-        st.radio(
-            "选择答案",
-            item["options"],
-            index=None,                  # 默认不选，必须自己作答
-            key=f"q_{qid}_{index}",       # key 含 quiz_id，换题后自动失效，不会串选项
-            label_visibility="collapsed",
+    with st.expander("📖 游戏规则", expanded=False):
+        st.markdown(
+            f"- 本轮共 **{total_n}** 道 Python 复习题\n"
+            "- 选择答案后点「✅ 提交答案」\n"
+            "- 正确 +10 分，错误不扣分\n"
+            "- 看完解析点「➡️ 下一题」继续\n"
+            "- 全部答完显示成绩和知识点得分图 🎉"
         )
-        st.divider()
-    submitted = st.form_submit_button("提交答案", use_container_width=True)
+    st.caption("知识点：变量·运算符·字符串·列表/字典/集合·循环·函数·递归·二维列表·排序·文件异常·算法")
 
-if submitted:
-    st.session_state.submitted = True
 
-if st.session_state.submitted:
-    score = 0
-    unanswered = 0
-    topic_total = {}
-    topic_right = {}
+# ----------------------------- 顶部标题区 -----------------------------
+st.markdown('<div class="big-title">Python 期末复习闯关小游戏</div>', unsafe_allow_html=True)
+st.markdown(
+    '<div class="subtitle">📚 期末刷题神器 · 一题一关 · 边玩边学，轻松巩固 Python 基础</div>',
+    unsafe_allow_html=True,
+)
+st.divider()
 
-    for index, item in enumerate(st.session_state.quiz, start=1):
-        user_answer = st.session_state.get(f"q_{qid}_{index}")
-        if user_answer is None:
-            unanswered += 1
-        is_right = user_answer == item["answer"]
-        score += int(is_right)
-        topic_total[item["topic"]] = topic_total.get(item["topic"], 0) + 1
-        topic_right[item["topic"]] = topic_right.get(item["topic"], 0) + int(is_right)
 
-    total = len(st.session_state.quiz)
-    if unanswered:
-        st.warning(f"有 {unanswered} 题没作答，已按答错计算。")
-    st.success(f"得分：{score} / {total}　称号：{get_title(score, total)}")
-    st.progress(score / total)
+# ----------------------------- 主体：逐题闯关 -----------------------------
+quiz = st.session_state.quiz
+idx = st.session_state.idx
 
-    st.subheader("每题解析")
-    for index, item in enumerate(st.session_state.quiz, start=1):
-        user_answer = st.session_state.get(f"q_{qid}_{index}")
-        is_right = user_answer == item["answer"]
-        status = "✅ 答对" if is_right else "❌ 答错"
-        with st.expander(f"第 {index} 题：{status}"):
-            st.write(f"你的答案：{user_answer if user_answer is not None else '未作答'}")
-            st.write(f"正确答案：{item['answer']}")
-            st.info(item["explain"])
+if st.session_state.completed or idx >= len(quiz):
+    # ---------------- 完成界面 ----------------
+    total = len(quiz)
+    correct = st.session_state.correct
+    rate = correct / total if total else 0
+    st.markdown(
+        f"""
+        <div class="quiz-card" style="text-align:center; padding-bottom:24px;">
+            <div style="font-size:52px;">🎉</div>
+            <h2 style="color:#1a3b5d; margin:6px 0;">闯关完成！</h2>
+            <p style="font-size:18px; color:#1a3b5d;">得分
+                <span style="color:#3776AB; font-size:30px; font-weight:800;">{correct * 10}</span> 分</p>
+            <p style="color:#3d5f7e;">✅ 正确 {correct} 题 · ❌ 错误 {st.session_state.wrong} 题 · 正确率 {round(rate * 100)}%</p>
+            <p style="font-size:17px; color:#2c4a6e; margin-top:10px;">称号：{get_title(rate)}</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
-    st.subheader("知识点得分率（%）")
-    chart_data = {
-        topic: round(topic_right[topic] / topic_total[topic] * 100, 1)
-        for topic in topic_total
-    }
-    st.bar_chart(chart_data)
+    tr, tt = st.session_state.topic_right, st.session_state.topic_total
+    if tt:
+        st.subheader("📊 知识点得分率（%）")
+        st.bar_chart({t: round(tr.get(t, 0) / tt[t] * 100, 1) for t in tt})
+        missed = [t for t in tt if tr.get(t, 0) < tt[t]]
+        if missed:
+            st.warning("建议重点复习：" + "、".join(missed))
+        else:
+            st.balloons()
 
-    missed = [t for t in topic_total if topic_right[t] < topic_total[t]]
-    if missed:
-        st.warning("建议重点复习：" + "、".join(missed))
-    else:
-        st.balloons()
+    if st.button("🔄 再来一轮", type="primary", use_container_width=True):
+        start_new_quiz(st.session_state.level, st.session_state.count)
+        st.rerun()
+
+else:
+    # ---------------- 答题界面 ----------------
+    item = quiz[idx]
+    qid = st.session_state.quiz_id
+    st.markdown(
+        f'<span class="q-number">📌 第 {idx + 1} / {len(quiz)} 题</span>'
+        f'<span class="q-tag">{DIFF_TAG.get(item["level"], item["level"])}</span>'
+        f'<span class="q-tag">{html.escape(item["topic"])}</span>',
+        unsafe_allow_html=True,
+    )
+    st.markdown(f'<div class="q-text">{html.escape(item["question"])}</div>', unsafe_allow_html=True)
+    if item.get("code"):
+        st.code(item["code"], language="python")
+
+    choice = st.radio(
+        "选择答案",
+        item["options"],
+        index=None,
+        key=f"opt_{qid}_{idx}",
+        disabled=st.session_state.answered,
+        label_visibility="collapsed",
+    )
+
+    col_submit, col_next = st.columns(2)
+    with col_submit:
+        if st.button(
+            "✅ 提交答案",
+            type="primary",
+            use_container_width=True,
+            disabled=st.session_state.answered or choice is None,
+        ):
+            st.session_state.selected = choice
+            st.session_state.answered = True
+            topic = item["topic"]
+            st.session_state.topic_total[topic] = st.session_state.topic_total.get(topic, 0) + 1
+            if choice == item["answer"]:
+                st.session_state.correct += 1
+                st.session_state.topic_right[topic] = st.session_state.topic_right.get(topic, 0) + 1
+            else:
+                st.session_state.wrong += 1
+            st.rerun()
+    with col_next:
+        is_last = idx == len(quiz) - 1
+        if st.button(
+            "🏁 查看成绩" if is_last else "➡️ 下一题",
+            use_container_width=True,
+            disabled=not st.session_state.answered,
+        ):
+            st.session_state.idx += 1
+            st.session_state.answered = False
+            st.session_state.selected = None
+            if st.session_state.idx >= len(quiz):
+                st.session_state.completed = True
+            st.rerun()
+
+    # ---------------- 提交后：反馈 + 解析 ----------------
+    if st.session_state.answered:
+        if st.session_state.selected == item["answer"]:
+            st.success("✅ 回答正确！+10 分")
+        else:
+            st.error(f"❌ 回答错误。正确答案：{item['answer']}")
+        st.info("💡 " + item["explain"])
+
+    st.markdown(
+        '<div style="margin-top:14px; text-align:center; font-size:12px; color:#8aa9c9;">'
+        '小组期末大作业 · Python 复习答题小游戏</div>',
+        unsafe_allow_html=True,
+    )
